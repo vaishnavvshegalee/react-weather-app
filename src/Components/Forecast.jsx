@@ -6,7 +6,7 @@ const Forecast = ({ weather: { list, timezone } }) => {
   return (
     <>
       <div className="mt-6">
-        <p className="text-white font-medium uppercase mb-2">Daily Forecast</p>
+        <p className="text-white font-medium uppercase mb-2">Hourly Forecast</p>
         <hr className="my-2 mb-4" />
         <div className="flex flex-col md:flex-row items-center justify-around text-white space-y-4 md:space-y-0">
           {list.map((item, i) => (
