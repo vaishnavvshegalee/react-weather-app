@@ -64,21 +64,25 @@ const formatForecastWeather = (data) => {
 };
 
 const getFormattedWeatherData = async (searchParams) => {
-  const formattedCurrentWeather = await getWeatherData(
-    "weather",
-    searchParams
-  ).then(formatCurrentWeather);
+  try {
+    const currentWeatherData = await getWeatherData("weather", searchParams);
+    const formattedCurrentWeather = formatCurrentWeather(currentWeatherData);
 
-  const { lat, lon } = formattedCurrentWeather;
+    const { lat, lon } = formattedCurrentWeather;
 
-  const formattedForecastWeather = await getWeatherData("forecast", {
-    lat,
-    lon,
-    exclude: "current,minutely,alerts",
-    units: searchParams.units,
-  }).then(formatForecastWeather);
+    const forecastWeatherData = await getWeatherData("forecast", {
+      lat,
+      lon,
+      exclude: "current,minutely,alerts",
+      units: searchParams.units,
+    });
+    const formattedForecastWeather = formatForecastWeather(forecastWeatherData);
 
-  return { ...formattedCurrentWeather, ...formattedForecastWeather };
+    return { ...formattedCurrentWeather, ...formattedForecastWeather };
+  } catch (error) {
+    console.error("Error in getFormattedWeatherData:", error);
+    throw error; // rethrow the error to be caught by the caller
+  }
 };
 
 const formatToLocalTime = (

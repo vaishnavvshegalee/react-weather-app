@@ -6,13 +6,20 @@ import { toast } from "react-toastify";
 const Inputs = ({ setQuery, units, setUnits }) => {
   const [city, setCity] = useState("");
 
-  const handleSearch = () => {
-    if (city !== "") {
-      setQuery({ q: city });
-      setCity("");
-      toast.success("Searching city...");
-    } else {
-      toast.error("Please Enter City!");
+  const handleSearch = async () => {
+    try {
+      if (city !== "") {
+        await setQuery({ q: city });
+
+        setCity("");
+      } else {
+        toast.error("Please Enter City!");
+      }
+    } catch (error) {
+      console.error("Error during city search:", error);
+      toast.error(
+        "An error occurred while searching for the city. Please try again."
+      );
     }
   };
   const handleLocation = () => {
