@@ -40,12 +40,12 @@ const Inputs = ({ setQuery, units, setUnits }) => {
   };
   return (
     <>
-      <div className="flex flex-row justify-center my-6">
-        <div className="flex flex-row w-3/4 items-center  justify-center space-x-4">
+      <div className="flex flex-col sm:flex-row justify-center my-6">
+        <div className="flex flex-col sm:flex-row w-full sm:w-3/4 items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <input
             type="text"
             placeholder="Search city"
-            className="text-xl font-light p-2 w-full shadow-xl focus:outline-none capitalize placeholder:lowercase"
+            className="text-xl font-light p-2 w-full sm:w-auto shadow-xl focus:outline-none capitalize placeholder:lowercase"
             value={city}
             onChange={(e) => setCity(e.currentTarget.value)}
           />
@@ -60,7 +60,7 @@ const Inputs = ({ setQuery, units, setUnits }) => {
             onClick={handleLocation}
           />
         </div>
-        <div className="flex flex-row w-1/4 items-center justify-center">
+        <div className="flex flex-row w-full sm:w-1/4 items-center justify-center mt-4 sm:mt-0">
           <button
             name="metric"
             className="text-xl text-white font-light transition ease-out hover:scale-125 "
